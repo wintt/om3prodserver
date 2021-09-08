@@ -23,7 +23,11 @@ app.use((req, res, next) => {
 //CORS Middleware
 app.use(function (req, res, next) {
     //Enabling CORS 
-    res.header("Access-Control-Allow-Origin", "*");
+    const allowedOrigins = ['https://om3uat.smartgeo.sg', 'https://www.onemap3d.gov.sg'];
+	const origin = req.headers.origin;
+	if (allowedOrigins.includes(origin)) {
+		res.setHeader('Access-Control-Allow-Origin', origin);
+	}
     res.header("Access-Control-Allow-Methods", "GET,HEAD,OPTIONS,POST,PUT");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, contentType,Content-Type, Accept, Authorization");
 	res.header("Cache-control", "public, max-age=3600");
